@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            
+            {% block title %}
+            Educa
+            {% endblock title %}
+                
+        </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+    </head>
+    <body>
+        <header>
+            <div class="header">
+                <a href="#">EDUCA</a>
+                <ul>
+                    
+                    {% if request.user.is_authenticated %}
+                    <li>
+                        <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Logout</button>
+                        </form>
+                        
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                        
+
+
+                </ul>
+            </div>
+        </header>
+        
+        {% block content %}
+            
+        {% endblock content %}
+
+        <script>
+        
+            document.addEventListener("DOMContentLoaded",(event)=>{
+            
+                //DOM loaded
+            {% block domready %}
+                
+            {% endblock domready %}
+                
+            })
+        </script>
+            
+    
+    </body>
+</html>

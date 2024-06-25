@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+
+{% if subject %}
+{{subject.title}} courses
+{% else %}
+All Courses
+{% endif %}
+    
+    
+{% endblock title %}
+
+
+
+
+{% block content %}
+    
+
+{% if subject %}
+{{subject.title}} Courses
+ {% else %}
+ All Courses   
+{% endif %}
+    <h3>subjects</h3>
+    <ul>
+
+{% for s in subjects %}
+    <li>
+        <a href="{% url 'course:course_list_subject' s.slug %}">{{s.title}}</a>
+        <br>
+        <span>
+            {{s.total_courses}} course {{s.total_courses|pluralize}}
+        </span>
+    </li>
+{% endfor %}
+    
+    </ul>
+
+    
+    {% for course in courses %}
+    
+    {% with subject=course.subject %}
+    <h3>
+        <a href="{% url 'course:course_detail' course.slug %}">{{course.title}}</a>
+    </h3>
+    <p>
+        <a href="{% url 'course:course_list_subject' subject.slug %}">{{subject}}</a>
+        {{course.total_modules}} modules
+        Instructor : {{ course.owner.username }}
+    </p>
+        
+    {% endwith %}
+        
+        
+    {% endfor %}
+        
+{% endblock content %}
+    
+
+    

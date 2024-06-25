@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+   
+   {% if object %}
+   Edit course "{{object.title}}"
+    {% else %}
+    create a new course
+
+   {% endif %}
+    
+{% endblock title %}
+    
+
+{% block content %}
+{% if object %}
+Edit course "{{object.title}}"
+ {% else %}
+ create a new course
+
+{% endif %}
+
+
+    <form action="" method="post" autocomplete="off" novalidate>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit"> save course</button>
+    </form>
+{% endblock content %}
+    
